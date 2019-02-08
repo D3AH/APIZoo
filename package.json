@@ -1,0 +1,39 @@
+{
+  "name": "apistockexpress",
+  "version": "0.1.0",
+  "description": "General API for stock with express.",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon index.js",
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/D3AH/APIStockExpress.git"
+  },
+  "keywords": [
+    "API",
+    "stock",
+    "express",
+    "nodejs"
+  ],
+  "author": "D3AH",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/D3AH/APIStockExpress/issues"
+  },
+  "homepage": "https://github.com/D3AH/APIStockExpress#readme",
+  "dependencies": {
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.18.3",
+    "connect-multiparty": "^2.2.0",
+    "express": "^4.16.4",
+    "jwt-simple": "^0.5.5",
+    "moment": "^2.24.0",
+    "mongoose": "^5.4.8",
+    "mongoose-type-email": "^1.0.10"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
