@@ -5,6 +5,10 @@ var ProductController = require('../controllers/product');
 
 var api = express.Router();
 
-api.get('/add', ProductController.addProduct);
+// POST
+api.post('/add', ProductController.addProduct);
+
+// DELETE
+api.delete('/delete', ProductController.removeProduct);
 
 module.exports = api;

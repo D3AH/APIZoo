@@ -12,7 +12,7 @@ var Product = require('../models/product');
  *
  * @param      {Object}  req     The request
  * @param      {Object}  res     The response
- * @return     {String} TypeOf request.
+ * @return     {String} Typeof request.
  */
 function addProduct(req, res) {
     res.status(200).send(typeof(req));
@@ -23,6 +23,7 @@ function addProduct(req, res) {
  *
  * @param      {Object}  req     The request
  * @param      {Object}  res     The response
+ * @return      {String} Typeof request.
  */
 function removeProduct(req, res) {
     res.status(200).send(typeof(req));
