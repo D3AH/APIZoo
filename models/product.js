@@ -1,5 +1,3 @@
-'use strict';
-
 const mongoose = require('mongoose');
 
 // Mongoose types
@@ -14,6 +12,8 @@ const ProductSchema = new mongoose.Schema({
      */
     code: {
         type: String,
+        index: true,
+        unique: true,
         required: [true, 'The code is required.']
     },
     /**
@@ -21,6 +21,7 @@ const ProductSchema = new mongoose.Schema({
      */
     description: {
         type: String,
+        index: true,
         required: [true, 'The description is required.']
     },
     /**
@@ -30,6 +31,13 @@ const ProductSchema = new mongoose.Schema({
         type: String,
         required: [true, 'The category is required.']
     }
+}, {
+    /**
+     * Collation, define: locale and strenght.
+     */
+    collation: { locale: 'es', strength: 1 }
 });
+
+ProductSchema.index({ code: 1, description: 'text' });
 
 module.exports = mongoose.model('Product', ProductSchema);

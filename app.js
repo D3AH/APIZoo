@@ -9,8 +9,21 @@ var app = express();
 var product_routes = require('./routes/product');
 
 /**
- * Add routes of products
+ * @todo Revisar que hace esto. Sin esto body está vacio.
  */
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
+// Add routes
 app.use('/v1/product', product_routes);
+
+// CORS
+app.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', 'Authorization, X-API-KEY, Origin, X-Requested-With, Content-Type, Accept, Access-Control-Allow-Request-Method');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
 
 module.exports = app;
