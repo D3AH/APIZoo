@@ -4,8 +4,7 @@ module.exports = {
     plugins: ['plugins/jsdoc-plugin-mongoose'],
     recurseDepth: 10,
     source: {
-        include: ['app.js', 'models/', 'controllers/'],
-        includePattern: '.+\\.js(doc|x)?$'
+        include: ['src/models', 'src/controllers', 'src/routes', 'src/index.js', 'src/app.js']
     },
     templates: {
         monospaceLinks: true
