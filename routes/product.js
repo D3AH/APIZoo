@@ -9,6 +9,6 @@ var api = express.Router();
 api.post('/add', ProductController.addProduct);
 
 // DELETE
-api.delete('/delete', ProductController.removeProduct);
+api.delete('/delete/:id', ProductController.removeProduct);
 
 module.exports = api;

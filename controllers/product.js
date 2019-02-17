@@ -20,11 +20,12 @@ function addProduct(req, res) {
 
     if(!validate) {
         Product.find({ code: tempProduct.code }, (err, products) => {
-            return products ? res.status(500).send({ message: 'There is already a product with that code.' }) : tempProduct
-            .save((err, productSaved) => {
-                return productSaved ? res.status(200).send({ product: productSaved }) : res.status(400).send({ message: 'Unexpected error.' });
+            products && products.length ? res.status(500).send({ message: 'There is already a product with that code.' }) : tempProduct
+            .save()
+            .then((productSaved) => {
+                productSaved ? res.status(200).send({ product: productSaved }) : res.status(400).send({ message: 'Unexpected error.' });
             }).catch((err) => {
-                return res.status(500).send({ message: 'Internal error server.' });
+                res.status(500).send({ message: 'Internal error server.' });
             });
         });
     } else {
@@ -40,7 +41,12 @@ function addProduct(req, res) {
  * @return      {String} Typeof request.
  */
 function removeProduct(req, res) {
-    res.status(200).send(typeof(req));
+    Product.findByIdAndDelete(req.params.id, (err, product) => {
+        product ? res.status(200).send({ message: 'Product successfully deleted.', product }) : res.status(400).send({ message: 'Unexpected error. Maybe product don\'t exist.' });
+    })
+    .catch((err) => {
+        res.status(500).send({ message: err });
+    });
 }
 
 module.exports = {
