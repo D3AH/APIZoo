@@ -6,5 +6,8 @@ module.exports = {
     source: {
         include: ['app.js', 'models/', 'controllers/'],
         includePattern: '.+\\.js(doc|x)?$'
+    },
+    templates: {
+        monospaceLinks: true
     }
 };
