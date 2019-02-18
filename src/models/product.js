@@ -30,7 +30,14 @@ const ProductSchema = new mongoose.Schema({
     category: {
         type: String,
         required: [true, 'The category is required.']
-    }
+    },
+    /**
+     * Stock: numbers of products avaible.
+     */
+     stock: {
+        type: Number,
+        required: false
+     }
 }, {
     /**
      * Collation, define: locale and strenght.
