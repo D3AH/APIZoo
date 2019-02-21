@@ -5,10 +5,13 @@ var ProductController = require('../controllers/product');
 
 var api = express.Router();
 
-// POST
+// Only admin
 api.post('/add', ProductController.addProduct);
-
-// DELETE
+api.put('/update/:id', ProductController.updateProduct);
 api.delete('/delete/:id', ProductController.removeProduct);
+
+// No middleware
+api.get('/search', ProductController.searchProduct);
+api.get('/list', ProductController.searchProduct);
 
 module.exports = api;
