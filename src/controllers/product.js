@@ -25,7 +25,7 @@ function addProduct(req, res) {
             .then((productSaved) => {
                 productSaved ? res.status(200).send({ product: productSaved }) : res.status(400).send({ message: 'Unexpected error.' });
             })
-            .catch((err) => res.status(500).send({ message: 'Internal error server.' }));
+            .catch((err) => res.status(500).send({ err }));
         });
     } else {
         res.status(400).send({ message: validate.message });
@@ -43,7 +43,7 @@ function removeProduct(req, res) {
     Product.findByIdAndDelete(req.params.id, (err, product) => {
         product ? res.status(200).send({ message: 'Product successfully deleted.', product }) : res.status(400).send({ message: 'Unexpected error. Maybe product don\'t exist.' });
     })
-    .catch((err) => res.status(500).send({ message: err }));
+    .catch((err) => res.status(500).send({ err }));
 }
 
 /**
