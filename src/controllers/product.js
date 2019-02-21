@@ -90,32 +90,6 @@ function listProducts(req, res) {
     .catch((err) => res.status(500).send({ err }));
 }
 
-/**
- * Update a product.
- *
- * @param      {<type>}  req     The request
- * @param      {<type>}  res     The resource
- */
-function updateProduct(req, res) {
-    Product.findOneAndUpdate(
-        { _id: req.params.id },
-        req.params.body,
-        { new: true },
-        (err, productUpdate) => {
-            if(!productUpdate) {
-                res.status(404).send({
-                    message: 'No update. Not found product or not have permissions.'
-                });
-            } else {
-                res.status(200).send({
-                    product: productUpdate
-                });
-            }
-    }).catch((err) => {
-        
-    });
-}
-
 module.exports = {
     addProduct,
     removeProduct
