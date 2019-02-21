@@ -71,7 +71,7 @@ function searchProduct(req, res) {
     /**
      * @TODO create a more complex search with multiple query params.
      */
-    Product.find({ name: new RegExp('.*'+req.query.search+'*.', 'i') }, (err, products) => {
+    Product.find({ name: new RegExp('.*'+req.query.name+'*.', 'i') }, (err, products) => {
         products ? res.status(200).send({ products }) : res.status(500).send({ message: 'Product dont found.' });
     })
     .catch((err) => res.status(500).send({ err }));
