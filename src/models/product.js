@@ -17,11 +17,18 @@ const ProductSchema = new mongoose.Schema({
         required: [true, 'The code is required.']
     },
     /**
+     * Name of product. Max lenght 250. [REQUIRED]
+     */
+    name: {
+        type: String,
+        index: true,
+        required: [true, 'The name is required.']
+    },
+    /**
      * Description of product. Max lenght 250. [REQUIRED]
      */
     description: {
         type: String,
-        index: true,
         required: [true, 'The description is required.']
     },
     /**
@@ -38,6 +45,6 @@ const ProductSchema = new mongoose.Schema({
     collation: { locale: 'es', strength: 1 }
 });
 
-ProductSchema.index({ code: 1, description: 'text' });
+ProductSchema.index({ code: 1, name: 'text' });
 
 module.exports = mongoose.model('Product', ProductSchema);
