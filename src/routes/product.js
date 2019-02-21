@@ -12,6 +12,6 @@ api.delete('/delete/:id', ProductController.removeProduct);
 
 // No middleware
 api.get('/search', ProductController.searchProduct);
-api.get('/list', ProductController.searchProduct);
+api.get('/list', ProductController.listProducts);
 
 module.exports = api;
