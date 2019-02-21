@@ -1,12 +1,23 @@
 'use strict';
 
+/**
+ * Jwt service
+ * @module service/jwt
+ */
+
 var jwt = require('jwt-simple');
 var moment = require('moment');
-/**
- * @TODO Get key of a file.
- */
-var secret = 'secret_key_pls_use_env_file';
 
+// Import env
+var env = require('../env');
+var secret = env.secret_key;
+
+/**
+ * Creates a token.
+ *
+ * @param      {Object}  user    The user
+ * @return     {String}  The token.
+ */
 exports.createToken = function(user) {
     var { name, surname, email, role } = user;
     var payload = {
