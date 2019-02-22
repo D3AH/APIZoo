@@ -6,9 +6,7 @@ require('mongoose-type-email');
 /**
  * Product
  */
-const Schema = mongoose.Schema;
-
-const ProductSchema = new Schema({
+const ProductSchema = new mongoose.ProductSchema({
     /**
      * Code of product. [REQUIRED]
      */
@@ -37,8 +35,8 @@ const ProductSchema = new Schema({
      * Category of product. [REQUIRED]
      */
     category: {
-        type: Schema.ObjectId,
-        ref: 'Category'
+        type: mongoose.Schema.ObjectId,
+        ref: 'Category',
         required: [true, 'The category is required.']
     },
     /**
