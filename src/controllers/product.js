@@ -33,14 +33,14 @@ function addProduct(req, res) {
 }
 
 /**
- * Adds a product to stock.
+ * Add stock.
  * @TODO Revisar esto. Creo que no funciona y estas feo.
  *
  * @param      {Object}  req     The request
  * @param      {Object}  res     The resource
  * @return     {Integer} Return stock.
  */
-function addProductToStock(req, res) {
+function addStock(req, res) {
     var code = req.params.code;
 
     Product.findOne({ code: code }, (err, product) => {
