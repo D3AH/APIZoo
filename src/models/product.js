@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // Mongoose types
-require('mongoose-type-email'); 
+require('mongoose-type-email');
 
 /**
  * Product
@@ -43,7 +43,10 @@ const ProductSchema = new mongoose.Schema({
      */
      stock: {
         type: Number,
-        required: false
+        default: 0,
+        required: function (val) {
+            return this.val >= 0;
+        }
      }
 }, {
     /**
