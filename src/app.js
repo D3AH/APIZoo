@@ -8,6 +8,7 @@ var app = express();
 // Import routes
 var product_routes = require('./routes/product');
 var category_routes = require('./routes/category');
+var user_routes = require('./routes/user');
 
 /**
  * @todo Revisar que hace esto. Sin esto body está vacio.
@@ -18,6 +19,7 @@ app.use(bodyParser.json());
 // Add routes
 app.use('/v1/product', product_routes);
 app.use('/v1/category', category_routes);
+app.use('/v1/user', user_routes);
 
 // CORS
 app.use((req, res, next) => {
