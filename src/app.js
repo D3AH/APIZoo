@@ -6,9 +6,12 @@ var bodyParser = require('body-parser');
 var app = express();
 
 // Import routes
-var product_routes = require('./routes/product');
-var category_routes = require('./routes/category');
-var user_routes = require('./routes/user');
+var routes = {
+    product: require('./routes/product'),
+    category: require('./routes/category'),
+    user: require('./routes/user'),
+    bill: require('./routes/bill')
+};
 
 /**
  * @todo Revisar que hace esto. Sin esto body está vacio.
@@ -17,9 +20,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 // Add routes
-app.use('/v1/product', product_routes);
-app.use('/v1/category', category_routes);
-app.use('/v1/user', user_routes);
+app.use('/v1/product', routes.product);
+app.use('/v1/category', routes.category);
+app.use('/v1/user', routes.user);
+app.use('/v1/bill', routes.bill);
 
 // CORS
 app.use((req, res, next) => {
