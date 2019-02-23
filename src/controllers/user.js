@@ -1,47 +1,57 @@
 'use strict';
 
-var User = require('../models/user');
+/**
+ * User controller
+ * @module controller/user
+ */
 
-var bcrypt = require('bcrypt-nodejs');
-var jwt = require('../services/jwt');
+const User = require('../models/user');
 
-function saveUser(req, res) {
-    var params = req.body;
-    var user = new User(params);
-    user.role = 'ROLE_CLIENT';
-    user.image = null;
+/**
+ * Adds a user.
+ *
+ * @param      {Object}  req     The request
+ * @param      {Object}  res     The response
+ * @return     {Object}  Status error message || user saved.
+ */
+function addUser(req, res) {
+    var tempUser = new User(req.body);
+    var validate = tempUser.validateSync();
 
-    // Check if it contains errors.
-    if (!user.validateSync()) {
-        User.findOne({ email: user.email}, (err, issetUser) => {
-            if(!issetUser) {
-                // ENCRYPT PASSWORD
-                bcrypt.hash(params.password, null, null, (error, hash) => {
-                    user.password = hash;
-                    user.save()
-                        .then((userStored) => {
-                            res.status(200).send({ user: userStored });
-                        })
-                        .catch((error) => {
-                            res.status(404).send({ message: 'No se ha podido registrar el usuario.' });
-                        });
-                });
-            } else {
-                res.status(200).send('El usuario no puede registrarse.');
-            }
-        })
-        .catch((err) => {
-            console.log(err);
+    if(!validate) {
+        User.find({ code: tempUser.code }, (err, users) => {
+            users && users.length ? res.status(500).send({ message: 'There is already a user with that code.' }) : tempUser
+            .save()
+            .then((userSaved) => {
+                userSaved ? res.status(200).send({ user: userSaved }) : res.status(400).send({ message: 'Unexpected error.' });
+            })
+            .catch((err) => res.status(500).send({ err }));
         });
     } else {
-        // In case of validation error
-        console.log(user.validateSync().message);
-        res.status(502).send('Not accept null values. ' + user.validateSync().message);
+        res.status(400).send({ message: validate.message });
     }
-
-    res.status(200);
 }
 
+/**
+ * Removes a user.
+ *
+ * @param      {Object}  req     The request
+ * @param      {Object}  res     The response
+ * @return      {String|Object}     Status error message || user deleted.
+ */
+function removeUser(req, res) {
+    User.findByIdAndDelete(req.params.id, (err, user) => {
+        user ? res.status(200).send({ message: 'User successfully deleted.', user }) : res.status(400).send({ message: 'Unexpected error. Maybe user don\'t exist.' });
+    })
+    .catch((err) => res.status(500).send({ err }));
+}
+
+/**
+ * Login user and return a token or the user logged.
+ *
+ * @param {Object} req The request
+ * @param {Object} res The response
+ */
 function loginUser(req, res) {
     var params = req.body;
     var email = params.email;
@@ -62,58 +72,59 @@ function loginUser(req, res) {
         }
     })
     .catch((err) => {
-        res.status(500).send({ message: 'ERROR in login.' })
+        res.status(500).send(err)
     })
 }
 
-function listUser(req, res) {
-    User.find({/* All */}, (err, users) => {
-        res.status(200).send(users);
-    }).catch((err) => {
-        res.status(500).send({ message: 'ERROR listing users.' })
-    })
-}
-
-function deleteUser(req, res) {
-    var id  = req.params.id;
-    User.findOneAndDelete({ _id: id }, (err, user) => {
-        if(!user) {
-            res.status(404).send({ message: 'User not found.' });
-        } else {
-            res.status(200).send(user);
-        }
-    }).catch((err) => {
-        logger.error(err);
-        res.status(500).send({ message: 'ERROR deleting user.' })
-    })
-}
-
+/**
+ * Update a user.
+ *
+ * @param {Object} req     The request
+ * @param {Object} res     The response
+ * @returns     {String|Object}     Status error message || user updated.
+ */
 function updateUser(req, res) {
-    var userId = req.params.id;
-    var update = req.body;
-
-    User.findOneAndUpdate({ _id: userId }, update, { new: true }, (err, userUpdate) => {
-        if(!userUpdate && !err) {
-            res.status(404).send({
-                message: 'No update.'
-            });
-        } else {
-            res.status(200).send({
-                user: userUpdate
-            });
-        }
-    }).catch((err) => {
-        res.status(500).send({
-            message: 'ERROR UPDATE',
-            error: err
-        });
+    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
+        user ? res.status(200).send({ user }) : res.status(500).send({ message: 'User dont found.' });
     })
+    .catch((err) => res.status(500).send({ err }));
+}
+
+/**
+ * Search users.
+ *
+ * @param {Object} req The request
+ * @param {Object} res The response
+ * @return String|Object|Array}     Status error message || user searched.
+ */
+function searchUser(req, res) {
+    /**
+     * @TODO create a more complex search with multiple query params.
+     */
+    User.find({ name: new RegExp('.*'+req.query.name+'*.', 'i') }, (err, users) => {
+        users ? res.status(200).send({ users }) : res.status(500).send({ message: 'User dont found.' });
+    })
+    .catch((err) => res.status(500).send({ err }));
+}
+
+/**
+ * List users.
+ *
+ * @param {Object} req The request
+ * @param {Object} res The response
+ */
+function listUsers(req, res) {
+    User.find({/* All */ }, (err, users) => {
+        res.status(200).send({ users });
+    })
+    .catch((err) => res.status(500).send({ err }));
 }
 
 module.exports = {
-    saveUser,
+    addUser,
+    removeUser,
     loginUser,
-    listUser,
-    deleteUser,
-    updateUser
-};
+    updateUser,
+    searchUser,
+    listUsers
+}

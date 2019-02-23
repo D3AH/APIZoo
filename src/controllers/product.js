@@ -40,30 +40,30 @@ function addProduct(req, res) {
  * @param      {Object}  res     The resource
  * @return     {Integer} Return stock.
  */
-function addStock(req, res) {
-    var code = req.params.code;
+// function addStock(req, res) {
+//     var code = req.params.code;
 
-    Product.findOne({ code: code }, (err, product) => {
-        if(product) {
-            product.stock = parseInt(product.stock) + abs(parseInt(req.body.number));
+//     Product.findOne({ code: code }, (err, product) => {
+//         if(product) {
+//             product.stock = parseInt(product.stock) + abs(parseInt(req.body.number));
 
-            if(!product.validateSync()) {
-                product.save()
-                .then((saved) => {
-                    res.status(200).send(saved.stock);
-                })
-                .catch((err) => {
-                    res.status(500).send(err);
-                });
-            } else {
-                res.status(500).send({ message: validate.message });
-            }
+//             if(!product.validateSync()) {
+//                 product.save()
+//                 .then((saved) => {
+//                     res.status(200).send(saved.stock);
+//                 })
+//                 .catch((err) => {
+//                     res.status(500).send(err);
+//                 });
+//             } else {
+//                 res.status(500).send({ message: validate.message });
+//             }
 
-        } else {
-            res.status(404).send({ message: 'Product with code ' + code + ' not found.' });
-        }
-    });
-}
+//         } else {
+//             res.status(404).send({ message: 'Product with code ' + code + ' not found.' });
+//         }
+//     });
+// }
 
 /**
  * Reduce stock
@@ -73,30 +73,30 @@ function addStock(req, res) {
  * @param      {Object}  res     The resource
  * @return     {Integer} Return stock.
  */
-function reduceStock(req, res) {
-    var code = req.params.code;
+// function reduceStock(req, res) {
+//     var code = req.params.code;
 
-    Product.findOne({ code: code }, (err, product) => {
-        if(product) {
-            product.stock = parseInt(product.stock) - abs(parseInt(req.body.number));
+//     Product.findOne({ code: code }, (err, product) => {
+//         if(product) {
+//             product.stock = parseInt(product.stock) - abs(parseInt(req.body.number));
 
-            if(!product.validateSync()) {
-                product.save()
-                .then((saved) => {
-                    res.status(200).send(saved.stock);
-                })
-                .catch((err) => {
-                    res.status(500).send(err);
-                });
-            } else {
-                res.status(500).send({ message: validate.message });
-            }
+//             if(!product.validateSync()) {
+//                 product.save()
+//                 .then((saved) => {
+//                     res.status(200).send(saved.stock);
+//                 })
+//                 .catch((err) => {
+//                     res.status(500).send(err);
+//                 });
+//             } else {
+//                 res.status(500).send({ message: validate.message });
+//             }
 
-        } else {
-            res.status(404).send({ message: 'Product with code ' + code + ' not found.' });
-        }
-    });
-}
+//         } else {
+//             res.status(404).send({ message: 'Product with code ' + code + ' not found.' });
+//         }
+//     });
+// }
 
 /**
  * Removes a product.
