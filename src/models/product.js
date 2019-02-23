@@ -1,8 +1,5 @@
 const mongoose = require('mongoose');
 
-// Mongoose types
-require('mongoose-type-email');
-
 /**
  * Product
  */
