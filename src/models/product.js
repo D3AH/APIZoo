@@ -6,7 +6,7 @@ require('mongoose-type-email');
 /**
  * Product
  */
-const ProductSchema = new mongoose.ProductSchema({
+const ProductSchema = new mongoose.Schema({
     /**
      * Code of product. [REQUIRED]
      */
