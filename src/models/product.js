@@ -42,9 +42,7 @@ const ProductSchema = new mongoose.Schema({
      stock: {
         type: Number,
         default: 0,
-        required: function (val) {
-            return this.val >= 0;
-        }
+        required: false,
      }
 }, {
     /**
