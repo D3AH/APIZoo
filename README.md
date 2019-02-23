@@ -1,4 +1,6 @@
 # APIStockExpress
+[![CodeFactor](https://www.codefactor.io/repository/github/d3ah/apistockexpress/badge)](https://www.codefactor.io/repository/github/d3ah/apistockexpress)
+
 Simple API build with NodeJS, Express and MongoDB.
 
 ## List of models
