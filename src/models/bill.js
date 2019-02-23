@@ -30,7 +30,7 @@ const BillSchema = new mongoose.Schema({
         product: {
             type: mongoose.Schema.ObjectId,
             ref: 'User',
-            required: [true, 'The user is required.']
+            required: true,
         },
         number: Number,
     }]
