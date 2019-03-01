@@ -30,8 +30,7 @@ api.post('/user/login',
  * PUT
  */
 api.put('/user/update/:id',
-    [md_auth.ensureAut,
-    md_auth.ensureAutAdmin],
+    md_auth.ensureAut,
     UserController.updateUser);
 
 /**
