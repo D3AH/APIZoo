@@ -7,6 +7,9 @@
 
 const User = require('../models/user');
 
+const bcrypt = require('bcrypt-nodejs');
+const jwt = require('../services/jwt');
+
 /**
  * Adds a user.
  *
@@ -19,13 +22,16 @@ function addUser(req, res) {
     var validate = tempUser.validateSync();
 
     if(!validate) {
-        User.find({ code: tempUser.code }, (err, users) => {
-            users && users.length ? res.status(500).send({ message: 'There is already a user with that code.' }) : tempUser
-            .save()
-            .then((userSaved) => {
-                userSaved ? res.status(200).send({ user: userSaved }) : res.status(400).send({ message: 'Unexpected error.' });
-            })
-            .catch((err) => res.status(500).send({ err }));
+        User.find({ email: tempUser.email }, (err, users) => {
+            users && users.length ? res.status(500).send({ message: 'There is already a user with that email.' }) : bcrypt.hash(tempUser.password, null, null, (error, hash) => {
+                tempUser.password = hash;
+                tempUser
+                    .save()
+                    .then((userSaved) => {
+                        userSaved ? res.status(200).send({ user: userSaved }) : res.status(400).send({ message: 'Unexpected error.' });
+                    })
+                    .catch((err) => res.status(500).send({ err }));
+            });
         });
     } else {
         res.status(400).send({ message: validate.message });
