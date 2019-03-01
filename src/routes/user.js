@@ -11,14 +11,16 @@ var api = express.Router();
  * GET
  */
 api.get('/user/all',
-    [md_auth.ensureAut, md_auth.ensureAutAdmin],
+    [md_auth.ensureAut,
+    md_auth.ensureAutAdmin],
     UserController.listUser);
 
 /**
  * POST
  */
 api.post('/user/add',
-    [md_auth.ensureAut,md_auth.ensureAutAdmin],
+    [md_auth.ensureAut,
+    md_auth.ensureAutAdmin],
     UserController.saveUser);
 
 api.post('/user/login',
@@ -28,14 +30,16 @@ api.post('/user/login',
  * PUT
  */
 api.put('/user/update/:id',
-    [md_auth.ensureAut, md_auth.ensureAutAdmin],
+    [md_auth.ensureAut,
+    md_auth.ensureAutAdmin],
     UserController.updateUser);
 
 /**
  * DELETE
  */
 api.delete('/user/delete/:id',
-    [md_auth.ensureAut, md_auth.ensureAutAdmin],
+    [md_auth.ensureAut,
+    md_auth.ensureAutAdmin],
     UserController.deleteUser);
 
 module.exports = api;

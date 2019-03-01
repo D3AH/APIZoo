@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
  */
 const BillSchema = new mongoose.Schema({
     /**
-     * Code of bill. [REQUIRED]
+     * Number of bill. [REQUIRED]
      */
     number: {
         type: String,
