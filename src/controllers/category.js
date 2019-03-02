@@ -6,6 +6,7 @@
  */
 
 const Category = require('../models/category');
+const Product = require('../models/product');
 
 /**
  * Adds a category.
@@ -40,8 +41,13 @@ function addCategory(req, res) {
  * @return      {String|Object}     Status error message || category deleted.
  */
 function removeCategory(req, res) {
-    Category.findByIdAndDelete(req.params.id, (err, category) => {
-        category ? res.status(200).send({ message: 'Category successfully deleted.', category }) : res.status(400).send({ message: 'Unexpected error. Maybe category don\'t exist.' });
+    var categoryId = req.params.id;
+
+    Category.findByIdAndDelete(categoryId, (err, category) => {
+        Category.findOne({ code: 'DEFAULT'}, (err, categoryDefault) => { 
+            Product.updateMany({ category: categoryId }, { category: categoryDefault._id }, (err, products) => console.log(products));
+            category ? res.status(200).send({ message: 'Category successfully deleted.', category }) : res.status(400).send({ message: 'Unexpected error. Maybe category don\'t exist.' });
+        })
     })
     .catch((err) => res.status(500).send({ err }));
 }

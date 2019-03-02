@@ -45,7 +45,6 @@ const ProductSchema = new mongoose.Schema({
         required: true,
         validate: {
             validator: (value) => {
-                console.log(value);
                 return value >= 0;
             },
             message: props => `The stock can't be ${props.value}, must be up to 0.`
