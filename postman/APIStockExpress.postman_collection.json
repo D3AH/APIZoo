@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "5127ef33-3038-41c2-8b39-b06d9feddfa0",
+		"_postman_id": "6908f7ba-fd83-4729-827d-f9b831da5f18",
 		"name": "APIStockExpress",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -77,34 +77,113 @@
 								{
 									"key": "code",
 									"value": "A1",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "name",
 									"value": "Ficticio",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "description",
 									"value": "Producto ficticio.",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "category",
-									"value": "Factory",
+									"value": "5c79dc225eed294b1cab56a6",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{domain}}/product/update/5c6e206bf56935790360f3b1",
+							"raw": "{{domain}}/product/update/5c79ca40857aa93a9c620aea",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
 								"product",
 								"update",
-								"5c6e206bf56935790360f3b1"
+								"5c79ca40857aa93a9c620aea"
+							]
+						},
+						"description": "Updates a product."
+					},
+					"response": []
+				},
+				{
+					"name": "Product Add Stock",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "number",
+									"value": "560",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/product/stock/add/TV1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"stock",
+								"add",
+								"TV1"
+							]
+						},
+						"description": "Updates a product."
+					},
+					"response": []
+				},
+				{
+					"name": "Product Reduce Stock",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "number",
+									"value": "100",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/product/stock/reduce/TV1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"stock",
+								"reduce",
+								"TV1"
 							]
 						},
 						"description": "Updates a product."
@@ -206,7 +285,7 @@
 							"urlencoded": [
 								{
 									"key": "code",
-									"value": "C1",
+									"value": "TV",
 									"type": "text"
 								},
 								{
@@ -226,12 +305,12 @@
 								"add"
 							]
 						},
-						"description": "Adds a product."
+						"description": "Adds a category."
 					},
 					"response": []
 				},
 				{
-					"name": "Product Update",
+					"name": "Category Update",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -247,43 +326,28 @@
 							"urlencoded": [
 								{
 									"key": "code",
-									"value": "A1",
-									"type": "text"
-								},
-								{
-									"key": "name",
-									"value": "Ficticio",
-									"type": "text"
-								},
-								{
-									"key": "description",
-									"value": "Producto ficticio.",
-									"type": "text"
-								},
-								{
-									"key": "category",
-									"value": "Factory",
+									"value": "DEFAULT",
 									"type": "text"
 								}
 							]
 						},
 						"url": {
-							"raw": "{{domain}}/product/update/5c6e206bf56935790360f3b1",
+							"raw": "{{domain}}/category/update/5c79d7abc6d433471198316c",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
-								"product",
+								"category",
 								"update",
-								"5c6e206bf56935790360f3b1"
+								"5c79d7abc6d433471198316c"
 							]
 						},
-						"description": "Updates a product."
+						"description": "Updates a category."
 					},
 					"response": []
 				},
 				{
-					"name": "Product Delete",
+					"name": "Category Delete",
 					"request": {
 						"method": "DELETE",
 						"header": [],
@@ -292,21 +356,21 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{domain}}/product/delete/5c69b2ada1c994471c8c0d83",
+							"raw": "{{domain}}/category/delete/5c79dc225eed294b1cab56a6",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
-								"product",
+								"category",
 								"delete",
-								"5c69b2ada1c994471c8c0d83"
+								"5c79dc225eed294b1cab56a6"
 							]
 						}
 					},
 					"response": []
 				},
 				{
-					"name": "Product List",
+					"name": "Category List",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -315,12 +379,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{domain}}/product/list",
+							"raw": "{{domain}}/category/list",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
-								"product",
+								"category",
 								"list"
 							]
 						}
@@ -328,7 +392,7 @@
 					"response": []
 				},
 				{
-					"name": "Product Search",
+					"name": "Category Search",
 					"request": {
 						"method": "GET",
 						"header": [],
@@ -337,12 +401,12 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "{{domain}}/product/search?name=Ficticio",
+							"raw": "{{domain}}/category/search?name=Ficticio",
 							"host": [
 								"{{domain}}"
 							],
 							"path": [
-								"product",
+								"category",
 								"search"
 							],
 							"query": [
