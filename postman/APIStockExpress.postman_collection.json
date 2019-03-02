@@ -1,0 +1,598 @@
+{
+	"info": {
+		"_postman_id": "5127ef33-3038-41c2-8b39-b06d9feddfa0",
+		"name": "APIStockExpress",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Product",
+			"item": [
+				{
+					"name": "Product Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "TV1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Gamdi A23",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Tarjeta de video de 42 Ghz.",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "5c79c9f3857aa93a9c620ae9",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/product/add",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"add"
+							]
+						},
+						"description": "Adds a product."
+					},
+					"response": []
+				},
+				{
+					"name": "Product Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "A1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Ficticio",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Producto ficticio.",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Factory",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/product/update/5c6e206bf56935790360f3b1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"update",
+								"5c6e206bf56935790360f3b1"
+							]
+						},
+						"description": "Updates a product."
+					},
+					"response": []
+				},
+				{
+					"name": "Product Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/product/delete/5c69b2ada1c994471c8c0d83",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"delete",
+								"5c69b2ada1c994471c8c0d83"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/product/list",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/product/search?name=Ficticio",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Ficticio"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Category",
+			"item": [
+				{
+					"name": "Category Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "C1",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Tarjetas de video.",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/category/add",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"category",
+								"add"
+							]
+						},
+						"description": "Adds a product."
+					},
+					"response": []
+				},
+				{
+					"name": "Product Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "code",
+									"value": "A1",
+									"type": "text"
+								},
+								{
+									"key": "name",
+									"value": "Ficticio",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "Producto ficticio.",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "Factory",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/product/update/5c6e206bf56935790360f3b1",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"update",
+								"5c6e206bf56935790360f3b1"
+							]
+						},
+						"description": "Updates a product."
+					},
+					"response": []
+				},
+				{
+					"name": "Product Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/product/delete/5c69b2ada1c994471c8c0d83",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"delete",
+								"5c69b2ada1c994471c8c0d83"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product List",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/product/list",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"list"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Product Search",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/product/search?name=Ficticio",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"product",
+								"search"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Ficticio"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "User Add",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Cliente",
+									"type": "text"
+								},
+								{
+									"key": "surname",
+									"value": "Usuario",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "name@domain.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/user/add",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"user",
+								"add"
+							]
+						},
+						"description": "Adds a user."
+					},
+					"response": []
+				},
+				{
+					"name": "User Login",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/x-www-form-urlencoded"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "name@domain.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "123",
+									"type": "text"
+								},
+								{
+									"key": "gettoken",
+									"value": "true",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/user/login",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"user",
+								"login"
+							]
+						},
+						"description": "Adds a user."
+					},
+					"response": []
+				},
+				{
+					"name": "User Update",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							},
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJuYW1lIjoiQ2xpZW50ZSIsInN1cm5hbWUiOiJVc3VhcmlvIiwiZW1haWwiOiJuYW1lQGRvbWFpbi5jb20iLCJyb2xlIjoiUk9MRV9DTElFTlQiLCJpYXQiOjE1NTE0ODY0OTUsImV4cCI6MTU1NDA3ODQ5NX0.V8oNF8ams3Xe1wlGGTV-O6Mdj_bXC98eu65uXsfdEfM",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "Cliente",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{domain}}/user/update/5c79cd08df3ad23dbd55ef11",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"user",
+								"update",
+								"5c79cd08df3ad23dbd55ef11"
+							]
+						},
+						"description": "Updates a user."
+					},
+					"response": []
+				},
+				{
+					"name": "User Delete",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1YzZmMWQ0MDQ5MmNmZjIzZTc0NDdjMmYiLCJuYW1lIjoiQSIsInN1cm5hbWUiOiJBIiwiZW1haWwiOiJhQGEuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJpbWFnZSI6bnVsbCwiaWF0IjoxNTUwNzg1OTA1LCJleHAiOjE1NTMzNzc5MDV9.--iydJ-NZhLhMeMuC_7j8I165ILatrxNhnCjBmvjkpg",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/x-www-form-urlencoded",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/user/delete/5c69aeb8d099a54036f1901b",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"user",
+								"delete",
+								"5c69aeb8d099a54036f1901b"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User List",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiI1YzZmMWQ0MDQ5MmNmZjIzZTc0NDdjMmYiLCJuYW1lIjoiQSIsInN1cm5hbWUiOiJBIiwiZW1haWwiOiJhQGEuY29tIiwicm9sZSI6IlJPTEVfQURNSU4iLCJpbWFnZSI6bnVsbCwiaWF0IjoxNTUwNzg1OTA1LCJleHAiOjE1NTMzNzc5MDV9.--iydJ-NZhLhMeMuC_7j8I165ILatrxNhnCjBmvjkpg",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{domain}}/user/all",
+							"host": [
+								"{{domain}}"
+							],
+							"path": [
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"id": "c83ea957-f64b-4f73-9977-d58c1a43c885",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"id": "2e9993ef-bef7-4c32-8980-a1f6d82381c3",
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "17403950-a55c-49a8-8071-a52b0b031041",
+			"key": "domain",
+			"value": "http://localhost:3789/v1",
+			"type": "string"
+		}
+	]
+}
