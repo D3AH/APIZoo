@@ -34,6 +34,16 @@ api.put('/update/:id',
     md_auth.ensureAutAdmin],
     ProductController.updateProduct);
 
+api.put('/stock/add/:code',
+    [md_auth.ensureAut,
+    md_auth.ensureAutAdmin],
+    ProductController.addStock);
+
+api.put('/stock/reduce/:code',
+    [md_auth.ensureAut,
+    md_auth.ensureAutAdmin],
+    ProductController.reduceStock);
+
 /**
  * DELETE
  */
