@@ -6,6 +6,7 @@
  */
 
 const Product = require('../models/product');
+const User = require('../models/user');
 
 /**
  * Adds a product.
@@ -99,6 +100,56 @@ function reduceStock(req, res) {
 }
 
 /**
+ * Add product to shopping cart.
+ *
+ * @param      {Object}  req     The request
+ * @param      {Object}  res     The resource
+ * @return     {Integer} Return user.
+ */
+function addShopping(req, res) {
+    var code = req.params.code;
+
+    Product.findOne({ code: code }, (err, product) => {
+        if(product) {
+            User.findById(req.user._id, (err, user) => {
+                var productId = product._id;
+                user.shopping.push({ product: productId, number: 1 });
+                user.save()
+                .then((userSaved) => res.status(200).send({ userSaved }))
+                .catch((err) => res.status(500).send({ err }));
+            });
+        } else {
+            res.status(404).send({ message: 'Product with code ' + code + ' not found.' });
+        }
+    });
+}
+
+/**
+ * Remove product to shopping cart.
+ *
+ * @param      {Object}  req     The request
+ * @param      {Object}  res     The resource
+ * @return     {Integer} Return user.
+ */
+function removeShopping(req, res) {
+    var code = req.params.code;
+
+    Product.findOne({ code: code }, (err, product) => {
+        if(product) {
+            User.findById(req.user._id, (err, user) => {
+                var shopping = user.shopping.filter(productF => productF.product.toString() !== product._id.toString());
+                user.shopping = shopping;
+                user.save()
+                .then((userSaved) => res.status(200).send({ userSaved }))
+                .catch((err) => res.status(500).send({ err }));
+            });
+        } else {
+            res.status(404).send({ message: 'Product with code ' + code + ' not found.' });
+        }
+    });
+}
+
+/**
  * Removes a product.
  *
  * @param      {Object}  req     The request
@@ -163,5 +214,7 @@ module.exports = {
     searchProduct,
     listProducts,
     addStock,
-    reduceStock
+    reduceStock,
+    addShopping,
+    removeShopping
 }

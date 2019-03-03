@@ -19,8 +19,9 @@ var secret = env.secret_key;
  * @return     {String}  The token.
  */
 exports.createToken = function(user) {
-    var { name, surname, email, role } = user;
+    var { _id, name, surname, email, role } = user;
     var payload = {
+        _id,
         name,
         surname,
         email,

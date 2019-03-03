@@ -15,7 +15,6 @@ api.get('/search',
     ProductController.searchProduct);
 
 api.get('/list',
-    md_auth.ensureAut,
     ProductController.listProducts);
 
 /**
@@ -43,6 +42,14 @@ api.put('/stock/reduce/:code',
     [md_auth.ensureAut,
     md_auth.ensureAutAdmin],
     ProductController.reduceStock);
+
+api.put('/shopping/add/:code',
+    md_auth.ensureAut,
+    ProductController.addShopping);
+
+api.put('/shopping/reduce/:code',
+    md_auth.ensureAut,
+    ProductController.removeShopping);
 
 /**
  * DELETE
