@@ -44,7 +44,18 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: false,
         default: 'ROLE_CLIENT'
-    }
+    },
+    /**
+     * Collection to buy.
+     */
+    shopping: [{
+        product: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Product',
+            required: true,
+        },
+        number: Number,
+    }]
 }, {
     /**
      * Collation, define: locale and strenght.

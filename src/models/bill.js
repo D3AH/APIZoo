@@ -29,7 +29,7 @@ const BillSchema = new mongoose.Schema({
     shoping: [{
         product: {
             type: mongoose.Schema.ObjectId,
-            ref: 'User',
+            ref: 'Product',
             required: true,
         },
         number: Number,
