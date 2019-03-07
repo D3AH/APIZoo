@@ -206,7 +206,7 @@ function searchProduct(req, res) {
  */
 function listProducts(req, res) {
     Product.find({/* All */ })
-    .sort({ sell: -1 })
+    .sort(req.query)
     .exec((err, products) => {
         res.status(200).send({ products });
     })

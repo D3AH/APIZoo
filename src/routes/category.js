@@ -23,8 +23,8 @@ api.get('/list',
  * POST
  */
 api.post('/add',
-    [md_auth.ensureAut,
-    md_auth.ensureAutAdmin],
+    // [md_auth.ensureAut,
+    // md_auth.ensureAutAdmin],
     CategoryController.addCategory);
 
 /**

@@ -6,6 +6,7 @@
  */
 
 const User = require('../models/user');
+const Bill = require('../models/bill');
 
 const bcrypt = require('bcrypt-nodejs');
 const jwt = require('../services/jwt');
@@ -19,6 +20,35 @@ const jwt = require('../services/jwt');
  */
 function addUser(req, res) {
     var tempUser = new User(req.body);
+    var validate = tempUser.validateSync();
+
+    if(!validate) {
+        User.find({ email: tempUser.email }, (err, users) => {
+            users && users.length ? res.status(500).send({ message: 'There is already a user with that email.' }) : bcrypt.hash(tempUser.password, null, null, (error, hash) => {
+                tempUser.password = hash;
+                tempUser
+                    .save()
+                    .then((userSaved) => {
+                        userSaved ? res.status(200).send({ user: userSaved }) : res.status(400).send({ message: 'Unexpected error.' });
+                    })
+                    .catch((err) => res.status(500).send({ err }));
+            });
+        });
+    } else {
+        res.status(400).send({ message: validate.message });
+    }
+}
+
+/**
+ * Adds a user.
+ *
+ * @param      {Object}  req     The request
+ * @param      {Object}  res     The response
+ * @return     {Object}  Status error message || user saved.
+ */
+function signUp(req, res) {
+    var tempUser = new User(req.body);
+    tempUser.role = 'ROLE_CLIENT';
     var validate = tempUser.validateSync();
 
     if(!validate) {
@@ -67,13 +97,14 @@ function loginUser(req, res) {
         if(user) {
             bcrypt.compare(password, user.password, (err, check) => {
                 if(check) {
-                    params.gettoken ? res.status(200).send({ token: jwt.createToken(user) }) : res.status(200).send(user);
+                    params.gettoken ? res.status(200).send({ token: jwt.createToken(user) }) : Bill.find({ user: user._id }, (err, bills) => {
+                        res.status(200).send({ bills });
+                    });
                 } else {
                     res.status(500).send({ message: 'Incorrect authentication.' });
                 }
             });
         } else {
-            console.log(user);
             res.status(500).send({ message: 'User not exist.' });
         }
     })
@@ -128,6 +159,7 @@ function listUsers(req, res) {
 
 module.exports = {
     addUser,
+    signUp,
     removeUser,
     loginUser,
     updateUser,

@@ -23,6 +23,9 @@ api.post('/add',
     md_auth.ensureAutAdmin],
     UserController.addUser);
 
+api.post('/signUp',
+    UserController.addUser);
+
 api.post('/login',
     UserController.loginUser);
 
