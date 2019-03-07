@@ -113,7 +113,7 @@ function addShopping(req, res) {
         if(product) {
             User.findById(req.user._id, (err, user) => {
                 var productId = product._id;
-                user.shopping.push({ product: productId, number: 1 });
+                user.shopping.push({ product: productId, number: req.body.number });
                 user.save()
                 .then((userSaved) => res.status(200).send({ userSaved }))
                 .catch((err) => res.status(500).send({ err }));
