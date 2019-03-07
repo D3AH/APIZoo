@@ -21,8 +21,8 @@ api.get('/list',
  * POST
  */
 api.post('/add',
-    [md_auth.ensureAut,
-    md_auth.ensureAutAdmin],
+    // [md_auth.ensureAut,
+    // md_auth.ensureAutAdmin],
     ProductController.addProduct);
 
 /**
@@ -34,8 +34,8 @@ api.put('/update/:id',
     ProductController.updateProduct);
 
 api.put('/stock/add/:code',
-    [md_auth.ensureAut,
-    md_auth.ensureAutAdmin],
+    // [md_auth.ensureAut,
+    // md_auth.ensureAutAdmin],
     ProductController.addStock);
 
 api.put('/stock/reduce/:code',

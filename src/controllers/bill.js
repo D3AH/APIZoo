@@ -6,6 +6,8 @@
  */
 
 const Bill = require('../models/bill');
+const User = require('../models/user');
+const Product = require('../models/product');
 
 /**
  * Adds a bill.
@@ -16,16 +18,28 @@ const Bill = require('../models/bill');
  */
 function addBill(req, res) {
     var tempBill = new Bill(req.body);
+    tempBill.user = req.user._id;
     var validate = tempBill.validateSync();
 
     if(!validate) {
-        Bill.find({ code: tempBill.code }, (err, bills) => {
-            bills && bills.length ? res.status(500).send({ message: 'There is already a bill with that code.' }) : tempBill
-            .save()
-            .then((billSaved) => {
-                billSaved ? res.status(200).send({ bill: billSaved }) : res.status(400).send({ message: 'Unexpected error.' });
-            })
-            .catch((err) => res.status(500).send({ err }));
+        Bill.find({ number: tempBill.number }, (err, bills) => {
+            if (bills && bills.length) {
+                res.status(500).send({ message: 'There is already a bill with that number.' })
+            } else {
+                User.findOne({ _id: req.user._id }, (err, user) => {
+                    tempBill.shopping = user.shopping;
+                    tempBill.shopping.forEach((shop) => {
+                        Product.findOneAndUpdate({ _id: shop.product }, { $inc: { stock: -1 }}, (err, response) => err);
+                    })
+                    tempBill
+                        .save()
+                        .then((billSaved) => {
+                            billSaved ? res.status(200).send({ bill: billSaved }) : res.status(400).send({ message: 'Unexpected error.' });
+                        })
+                        .catch((err) => res.status(500).send({ err }));
+                })
+                .catch((err) => res.status(500).send({ err }));
+            }
         });
     } else {
         res.status(400).send({ message: validate.message });

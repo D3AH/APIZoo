@@ -26,7 +26,7 @@ const BillSchema = new mongoose.Schema({
     /**
      * Collection to buy.
      */
-    shoping: [{
+    shopping: [{
         product: {
             type: mongoose.Schema.ObjectId,
             ref: 'Product',
