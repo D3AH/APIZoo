@@ -113,10 +113,14 @@ function addShopping(req, res) {
         if(product) {
             User.findById(req.user._id, (err, user) => {
                 var productId = product._id;
-                user.shopping.push({ product: productId, number: req.body.number });
-                user.save()
-                .then((userSaved) => res.status(200).send({ userSaved }))
-                .catch((err) => res.status(500).send({ err }));
+                if(product.stock > req.body.number) {
+                    user.shopping.push({ product: productId, number: req.body.number });
+                    user.save()
+                    .then((userSaved) => res.status(200).send({ userSaved }))
+                    .catch((err) => res.status(500).send({ err }));
+                } else {
+                    res.status(400).send({ message: 'No products to sale.' })
+                }
             });
         } else {
             res.status(404).send({ message: 'Product with code ' + code + ' not found.' });
@@ -201,10 +205,12 @@ function searchProduct(req, res) {
  * @param {Object} res The response
  */
 function listProducts(req, res) {
-    Product.find({/* All */ }, (err, products) => {
+    Product.find({/* All */ })
+    .sort({ sell: -1 })
+    .exec((err, products) => {
         res.status(200).send({ products });
     })
-    .catch((err) => res.status(500).send({ err }));
+    // .catch((err) => res.status(500).send({ err }));
 }
 
 module.exports = {

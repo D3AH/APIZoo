@@ -46,7 +46,7 @@ function addUser(req, res) {
  * @return      {String|Object}     Status error message || user deleted.
  */
 function removeUser(req, res) {
-    User.findByIdAndDelete(req.params.id, (err, user) => {
+    User.findAndDelete({ _id: req.params.id, role: 'ROLE_CLIENT' }, (err, user) => {
         user ? res.status(200).send({ message: 'User successfully deleted.', user }) : res.status(400).send({ message: 'Unexpected error. Maybe user don\'t exist.' });
     })
     .catch((err) => res.status(500).send({ err }));
@@ -90,7 +90,7 @@ function loginUser(req, res) {
  * @returns     {String|Object}     Status error message || user updated.
  */
 function updateUser(req, res) {
-    User.findByIdAndUpdate(req.params.id, req.body, { new: true }, (err, user) => {
+    User.findAndUpdate({ _id: req.params.id, role: 'ROLE_CLIENT' }, req.body, { new: true }, (err, user) => {
         user ? res.status(200).send({ user }) : res.status(500).send({ message: 'User dont found.' });
     })
     .catch((err) => res.status(500).send({ err }));

@@ -15,7 +15,7 @@ api.get('/search',
     BillController.searchBill);
 
 api.get('/list',
-    md_auth.ensureAut,
+    [md_auth.ensureAut, md_auth.ensureAutAdmin],
     BillController.listBills);
 
 /**

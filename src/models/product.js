@@ -49,6 +49,13 @@ const ProductSchema = new mongoose.Schema({
             },
             message: props => `The stock can't be ${props.value}, must be up to 0.`
         }
+     },
+     /**
+     * Stock: numbers of products avaible.
+     */
+     sell: {
+        type: Number,
+        default: 0,
      }
 }, {
     /**
