@@ -29,7 +29,8 @@ function addBill(req, res) {
                 User.findOne({ _id: req.user._id }, (err, user) => {
                     tempBill.shopping = user.shopping;
                     tempBill.shopping.forEach((shop) => {
-                        Product.findOneAndUpdate({ _id: shop.product }, { $inc: { stock: -Math.abs(parseInt(shop.number)), sell: Math.abs(parseInt(shop.number)) }}, (err, response) => err);
+                        # Check err here.
+                        Product.findOneAndUpdate({ _id: shop.product }, { $inc: { stock: -Math.abs(parseInt(shop.number)), sell: Math.abs(parseInt(shop.number)) }}, (err) => err);
                     })
                     tempBill
                         .save()
@@ -39,7 +40,7 @@ function addBill(req, res) {
                                 user.save().then().catch((err) => console.log(err));
                                 res.status(200).send({ bill: billSaved })
                             } else {
-
+                                res.status(402).send({ message: 'Unexpected error.' });
                             }
                         })
                         .catch((err) => res.status(500).send({ err }));
