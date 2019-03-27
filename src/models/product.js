@@ -66,4 +66,13 @@ const ProductSchema = new mongoose.Schema({
 
 ProductSchema.index({ code: 1, name: 'text' });
 
+// Duplicate the ID field.
+ProductSchema.virtual('id').get(function(){
+    return this._id.toHexString();
+});
+
+// Ensure virtual fields are serialised.
+ProductSchema.set('toJSON', {
+    virtuals: true
+});
 module.exports = mongoose.model('Product', ProductSchema);

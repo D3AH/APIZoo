@@ -29,7 +29,7 @@ function addBill(req, res) {
                 User.findOne({ _id: req.user._id }, (err, user) => {
                     tempBill.shopping = user.shopping;
                     tempBill.shopping.forEach((shop) => {
-                        # Check err here.
+                        // # Check err here.
                         Product.findOneAndUpdate({ _id: shop.product }, { $inc: { stock: -Math.abs(parseInt(shop.number)), sell: Math.abs(parseInt(shop.number)) }}, (err) => err);
                     })
                     tempBill

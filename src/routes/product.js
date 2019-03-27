@@ -14,7 +14,7 @@ api.get('/search',
     md_auth.ensureAut,
     ProductController.searchProduct);
 
-api.get('/list',
+api.get('/',
     ProductController.listProducts);
 
 /**

@@ -45,7 +45,7 @@ function removeCategory(req, res) {
 
     Category.findByIdAndDelete(categoryId, (err, category) => {
         Category.findOne({ code: 'DEFAULT'}, (err, categoryDefault) => { 
-            # Fix here. Catch updateMany.
+            // # Fix here. Catch updateMany.
             Product.updateMany({ category: categoryId }, { category: categoryDefault._id }, (err) => err);
             category ? res.status(200).send({ message: 'Category successfully deleted.', category }) : res.status(400).send({ message: 'Unexpected error. Maybe category don\'t exist.' });
         })
