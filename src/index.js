@@ -6,7 +6,7 @@ var app = require('./app');
 var port = process.env.PORT || 3789;
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/APIStockExpress',
+mongoose.connect('mongodb://localhost:27017/2014277Zoologico',
     { useNewUrlParser: true})
     .then(() => {
         console.log('Database connection successful');

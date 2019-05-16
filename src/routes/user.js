@@ -2,46 +2,30 @@
 
 var express = require('express');
 var UserController = require('../controllers/user');
-var md_auth = require('../middlewares/authenticated');
-
 
 var api = express.Router();
 
 /**
  * GET
  */
-api.get('/all',
-    [md_auth.ensureAut,
-    md_auth.ensureAutAdmin],
+api.get('/',
     UserController.listUsers);
 
 /**
  * POST
  */
-api.post('/add',
-    [md_auth.ensureAut,
-    md_auth.ensureAutAdmin],
+api.post('/',
     UserController.addUser);
-
-api.post('/signUp',
-    UserController.addUser);
-
-api.post('/login',
-    UserController.loginUser);
-
 /**
  * PUT
  */
-api.put('/update/:id',
-    md_auth.ensureAut,
+api.put('/:id',
     UserController.updateUser);
 
 /**
  * DELETE
  */
-api.delete('/delete/:id',
-    [md_auth.ensureAut,
-    md_auth.ensureAutAdmin],
+api.delete('/:id',
     UserController.removeUser);
 
 module.exports = api;
