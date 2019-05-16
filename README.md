@@ -1,5 +1,4 @@
-# APIStockExpress
-[![CodeFactor](https://www.codefactor.io/repository/github/d3ah/apistockexpress/badge)](https://www.codefactor.io/repository/github/d3ah/apistockexpress)
+# APIZoo
 
 Simple API build with NodeJS, Express and MongoDB.
 
